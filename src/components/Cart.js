@@ -1,15 +1,22 @@
-import ProductsList from "./ProductList";
+import '../css/Cart.css'
 
 function Cart({ cart, updateCart }) {
-    console.log('cart', cart);
+
     return (
         <div>
             <ul>
                 {
-                    cart.map(({ nom, quantite }, index) => {
+                    cart.map(({ nom, quantite, prix }, index) => {
                         return (
                             <li key={`${nom}-${index}`}>
-                                {nom} x {quantite}
+                                <div>
+                                    <span>
+                                        {nom} x {quantite}
+                                    </span>
+                                    <span>
+                                        {(quantite * prix).toFixed(2)} €
+                                    </span>
+                                </div>
                             </li>
                         )
                     })

@@ -9,6 +9,8 @@ class Produit extends Component {
         return (
             <div>
                 <h2>{this.state.product.nom}</h2>
+                <img src={`img/${this.state.product.url}`} alt={this.state.product.nom} />
+                <h3>{this.state.product.prix} €</h3>
             </div>
         )
     }
