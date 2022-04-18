@@ -1,0 +1,8 @@
+div {
+    > header {
+        display: flex;
+        justify-content: end;
+        padding: 1.5vw;
+        border-bottom: solid 1px black;
+        }
+    }
