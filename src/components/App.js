@@ -5,18 +5,20 @@ import ProductsList from './ProductList';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { products: [] }
+    this.state = { products: [], port: 8001 }
   }
+
   async componentDidMount() {
-    const result = await (await fetch('http://127.0.0.1:8000/getProducts')).json()
+    const result = await (await fetch(`http://127.0.0.1:${this.state.port}/getProducts`)).json()
     this.setState({ products: result.produits })
   }
+
   render() {
     return (
       <>
         <Header />
         <main>
-          <ProductsList products={this.state.products} />
+          <ProductsList products={this.state.products} port={this.state.port} />
         </main>
 
       </>

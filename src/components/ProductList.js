@@ -32,7 +32,7 @@ function ProductsList(props) {
             const data = new FormData();
             data.append('client', 2)
             data.append('cart', JSON.stringify(cart))
-            const result = await (await fetch('http://127.0.0.1:8000/setVente', {
+            const result = await (await fetch(`http://127.0.0.1:${props.port}/setVente`, {
                 method: 'POST',
                 body: data
             })).json()
@@ -40,7 +40,7 @@ function ProductsList(props) {
             resetCart()
             console.log(cart);
         } else {
-            alert("Le panier est vide")
+            alert("Votre panier est vide")
         }
     }
 
