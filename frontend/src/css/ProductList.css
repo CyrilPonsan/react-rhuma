@@ -13,16 +13,38 @@ body > div > main > section:nth-child(1) > article {
   width: 80%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 body > div > main > section:nth-child(1) > article > div {
+  display: flex;
+  flex-direction: column;
   padding: 1vw;
-  border: solid 1px black;
+  border: solid 1px rgba(45, 82, 4, 0.781);
   border-radius: 10px;
+  background-color: white;
+  row-gap: 1vh;
 }
-body > div > main > section:nth-child(1) > article > div > div > img {
+body > div > main > section:nth-child(1) > article > div > div:nth-child(1) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1vh;
+}
+body > div > main > section:nth-child(1) > article > div > div:nth-child(1) > img {
   width: 12vw;
   height: auto;
+}
+body > div > main > section:nth-child(1) > article > div > div:nth-child(2) {
+  display: flex;
+  justify-content: center;
+}
+body > div > main > section:nth-child(1) > article > div > div:nth-child(2) > button {
+  background-color: rgba(45, 82, 4, 0.781);
+  color: white;
+  padding: 1vh;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
 }
 body > div > main > section:nth-child(2) {
   width: 15vw;

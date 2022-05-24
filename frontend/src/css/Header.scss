@@ -4,22 +4,25 @@ div {
         justify-content: space-between;
         align-items: center;
         padding: 1.5vw;
-        border-bottom: solid 1px black;
+        background-color: white;
 
         >div:nth-child(2) {
             display: flex;
             align-items: center;
             column-gap: 1vw;
-            > img {
+
+            >img {
                 background-color: #646464;
                 border-radius: 5px;
                 width: 32px;
                 height: auto;
-                &:hover{
+
+                &:hover {
                     background-color: blue;
                     cursor: pointer;
                 }
             }
+
             >form {
                 display: flex;
                 column-gap: .5vw;

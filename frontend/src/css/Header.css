@@ -3,7 +3,7 @@ div > header {
   justify-content: space-between;
   align-items: center;
   padding: 1.5vw;
-  border-bottom: solid 1px black;
+  background-color: white;
 }
 div > header > div:nth-child(2) {
   display: flex;
