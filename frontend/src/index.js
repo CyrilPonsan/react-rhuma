@@ -13,7 +13,6 @@ root.render(
     <BrowserRouter>
       <Header />
       <section className="page">
-        <Sidebar />
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
