@@ -1,0 +1,17 @@
+.sidebar {
+  width: 10vw;
+  background-color: white;
+  height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar > ul {
+  display: flex;
+  flex-direction: column;
+  row-gap: 3vh;
+}
+.sidebar > ul > li > a > img {
+  width: 48px;
+  height: auto;
+}/*# sourceMappingURL=Sidebar.css.map */

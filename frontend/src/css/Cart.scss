@@ -1,8 +1,10 @@
 ul {
+    color: white;
     list-style-type: none;
     padding: 1vw;
-    > li {
-        > div:nth-child(1) {
+
+    >li {
+        >div:nth-child(1) {
             display: flex;
             justify-content: space-between;
         }

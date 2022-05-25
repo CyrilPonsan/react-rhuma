@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Cart from "./Cart";
-import Produit from "./Produit";
-import "../css/ProductList.css";
+import Cart from "../Cart";
+import Produit from "../Produit";
+import "./ProductList.css";
 
 function ProductsList(props) {
   const savedCart = localStorage.getItem("cart");

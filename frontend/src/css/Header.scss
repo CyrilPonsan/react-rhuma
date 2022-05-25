@@ -1,36 +1,34 @@
-div {
-    >header {
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5vw;
+    background-color: white;
+
+    >div:nth-child(2) {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        padding: 1.5vw;
-        background-color: white;
+        column-gap: 1vw;
 
-        >div:nth-child(2) {
-            display: flex;
-            align-items: center;
-            column-gap: 1vw;
+        >img {
+            background-color: #646464;
+            border-radius: 5px;
+            width: 32px;
+            height: auto;
 
-            >img {
-                background-color: #646464;
-                border-radius: 5px;
-                width: 32px;
-                height: auto;
-
-                &:hover {
-                    background-color: blue;
-                    cursor: pointer;
-                }
+            &:hover {
+                background-color: blue;
+                cursor: pointer;
             }
+        }
 
-            >form {
+        >form {
+            display: flex;
+            column-gap: .5vw;
+
+            >label {
                 display: flex;
                 column-gap: .5vw;
-
-                >label {
-                    display: flex;
-                    column-gap: .5vw;
-                }
             }
         }
     }

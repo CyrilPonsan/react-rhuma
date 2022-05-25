@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Acme&family=Pirata+One&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -16,13 +17,14 @@ body {
   background-color: black;
   display: flex;
   flex-direction: column;
-}
-body > #root {
-  position: relative;
-  min-height: 100vh;
+
+  >#root {
+    position: relative;
+    min-height: 100vh;
+  }
 }
 
 .page {
   display: flex;
   background-color: white;
-}/*# sourceMappingURL=index.css.map */
+}
