@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Acme&family=Pirata+One&display=swap");
+$green: rgba(136, 255, 0, 0.781);
+
+$button: rgba(45, 82, 4, 0.781);
+
 * {
   margin: 0;
   padding: 0;
@@ -16,24 +20,27 @@ body {
   background-color: white;
   display: flex;
   flex-direction: column;
-}
-body > #root {
-  position: relative;
-  min-height: 100vh;
+
+  >#root {
+    position: relative;
+    min-height: 100vh;
+  }
 }
 
 .button {
-  background-color: rgba(45, 82, 4, 0.781);
+  background-color: $button;
   color: white;
   padding: 1vh;
   font-weight: bold;
   border: none;
   border-radius: 50px;
+
+  &:active {
+    transform: translate(2px, 2px);
+  }
+
+  &:hover {
+    cursor: pointer;
+    filter: brightness(1.5);
+  }
 }
-.button:active {
-  transform: translate(2px, 2px);
-}
-.button:hover {
-  cursor: pointer;
-  filter: brightness(1.5);
-}/*# sourceMappingURL=index.css.map */

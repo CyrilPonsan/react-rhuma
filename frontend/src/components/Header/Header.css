@@ -1,1 +1,50 @@
-/*# sourceMappingURL=Header.css.map */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  color: rgba(136, 255, 0, 0.781);
+}
+header > div {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header > div > h1 {
+  padding: 2vw;
+}
+header > div > ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 1vw;
+       column-gap: 1vw;
+}
+header > div > ul > li > a {
+  text-decoration: none;
+  font-weight: bold;
+  color: rgba(136, 255, 0, 0.781);
+}
+header > div > ul > li:hover {
+  filter: brightness(1.5);
+}
+header > div > ul > li:nth-child(2) {
+  display: flex;
+  -moz-column-gap: 0.5vw;
+       column-gap: 0.5vw;
+  align-items: center;
+}
+header > div > ul > li:nth-child(2):hover {
+  cursor: pointer;
+}
+header > div > ul > li:nth-child(2) > span:nth-child(2) {
+  width: 1.5vw;
+  height: 1.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+}/*# sourceMappingURL=Header.css.map */

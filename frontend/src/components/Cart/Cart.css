@@ -1,0 +1,51 @@
+.cart > div:nth-child(1) {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.cart > div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2vh;
+  padding: 2vw;
+  border: 1px solid rgba(45, 82, 4, 0.781);
+  background-color: white;
+  width: 30vw;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+.cart > div:nth-child(2) > h2 {
+  border-bottom: 1px solid rgba(45, 82, 4, 0.781);
+}
+.cart > div:nth-child(2) > ul {
+  list-style-type: none;
+  padding: 1vw;
+}
+.cart > div:nth-child(2) > ul > li > div:nth-child(1) {
+  display: flex;
+  justify-content: space-between;
+}
+.cart > div:nth-child(2) > .total {
+  display: flex;
+  justify-content: space-between;
+  -moz-column-gap: 0.5vw;
+       column-gap: 0.5vw;
+  border-top: 1px solid rgba(45, 82, 4, 0.781);
+  padding: 1vh;
+}
+.cart > div:nth-child(2) > .boutons {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.cart > div:nth-child(2) > .boutons > div {
+  display: flex;
+  -moz-column-gap: 0.5vw;
+       column-gap: 0.5vw;
+}/*# sourceMappingURL=Cart.css.map */
