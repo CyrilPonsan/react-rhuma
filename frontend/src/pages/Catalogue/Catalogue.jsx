@@ -6,15 +6,15 @@ function Catalogue({ displayCart, produits, onAddToCart }) {
     <main>
       <section style={displayCart ? { opacity: 0 } : { opacity: 1 }}>
         <article>
-          {produits.map((product) => {
+          {produits.map((produit) => {
             return (
-              <div key={`${product.id}-${product.nom}`}>
-                <Produit produit={product} />
+              <div key={`${produit.id}-${produit.nom}`}>
+                <Produit produit={produit} />
                 <div>
                   <button
                     className="button"
                     onClick={() =>
-                      onAddToCart(product.id, product.nom, product.prix)
+                      onAddToCart(produit.id, produit.nom, produit.prix)
                     }
                   >
                     Add to Cart
