@@ -55,9 +55,5 @@ export const ProtectedRoute = ({ children }) => {
       />
     );
   }
-
-  if (token && location.pathname === "/login") {
-    return <Login isLogged={true} />;
-  }
   return children;
 };
