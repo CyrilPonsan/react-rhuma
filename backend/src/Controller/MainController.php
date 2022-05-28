@@ -58,4 +58,11 @@ class MainController extends AbstractController
 
         return $this->json(['response' => true]);
     }
+
+    #[Route('/api/client/getuser', name: 'api_client_getuser')]
+    public function getClient(UserRepository $userRepository): Response
+    {
+        $user = $userRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
+        return $this->json(['user' => $user]);
+    }
 }

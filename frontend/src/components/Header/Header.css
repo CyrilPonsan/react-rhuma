@@ -38,7 +38,7 @@ header > div > ul > li:nth-child(2) {
 header > div > ul > li:nth-child(2):hover {
   cursor: pointer;
 }
-header > div > ul > li:nth-child(2) > span:nth-child(2) {
+header > div > ul > li:nth-child(2) > span {
   width: 1.5vw;
   height: 1.5vw;
   display: flex;

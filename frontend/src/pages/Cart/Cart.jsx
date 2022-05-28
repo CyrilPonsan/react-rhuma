@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
+import { toTitleCase } from "../../modules/formatter";
 import "./Cart.css";
 
-function Cart({ cart, total, onOrderCart, onResetCart, onToggleCart }) {
+function Cart({ cart, total, onOrderCart, onResetCart }) {
+  const navigate = useNavigate();
+
   const handleClickOrder = () => {
     onOrderCart();
   };
@@ -10,12 +14,11 @@ function Cart({ cart, total, onOrderCart, onResetCart, onToggleCart }) {
   };
 
   const handleCloseCart = () => {
-    onToggleCart();
+    navigate("/");
   };
 
   return (
     <>
-      <div className="screen"></div>
       <div>
         {cart.length !== 0 ? (
           <h2>Contenu du panier :</h2>
@@ -28,7 +31,7 @@ function Cart({ cart, total, onOrderCart, onResetCart, onToggleCart }) {
               <li key={`${nom}-${index}`}>
                 <div>
                   <span>
-                    {nom} x {quantite}
+                    {toTitleCase(nom)} x {quantite}
                   </span>
                   <span>{(quantite * prix).toFixed(2)} €</span>
                 </div>

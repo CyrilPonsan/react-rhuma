@@ -1,12 +1,19 @@
 import "./App.css";
 import Header from "../../components/Header/Header";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Catalogue from "../Catalogue/Catalogue";
 import { useEffect, useState } from "react";
 import { setNbArticles, setTotal, sortCart } from "../../modules/sortArray";
 import { fetchPromise } from "../../modules/fetchModule";
 import { baseUrl } from "../../modules/data.js";
-import Cart from "../../components/Cart/Cart";
+import Cart from "../Cart/Cart";
+import {
+  AuthProvider,
+  ProtectedRoute,
+} from "../../components/AuthProvider/AuthProvider";
+import Account from "../Account/Account";
+import Login from "../Login/Login";
+import Logout from "../../components/Logout/Logout";
 
 function App() {
   const savedCart = localStorage.getItem("cart");
@@ -15,6 +22,7 @@ function App() {
   const [displayCart, updateDisplayCart] = useState(false);
   const [nbArticles, updateNbArticles] = useState(0);
   const [total, updateTotal] = useState(0);
+  const [user, setUser] = useState({});
 
   useEffect(() => init(), []);
   useEffect(() => {
@@ -27,6 +35,14 @@ function App() {
     fetchPromise("getproduits").then(({ produits }) => setProduits(produits));
     updateNbArticles(setNbArticles(cart));
     updateTotal(setTotal(cart));
+  };
+
+  const handleUser = (user) => {
+    if (user) {
+      setUser({ nom: user.nom });
+    } else {
+      setUser(null);
+    }
   };
 
   const handleAddToCart = (id, nom, prix) => {
@@ -65,25 +81,21 @@ function App() {
     updateCart([]);
   };
 
-  const handleToggleCart = () => {
-    updateDisplayCart(!displayCart);
-  };
-
   return (
-    <BrowserRouter>
-      {displayCart && (
-        <section className="cart">
-          <Cart
-            cart={cart}
-            total={total}
-            onOrderCart={handleOrderCart}
-            onResetCart={handleResetCart}
-            onToggleCart={handleToggleCart}
-          />
-        </section>
-      )}
-      <Header nbArticles={nbArticles} onToggleCart={handleToggleCart} />
+    <AuthProvider>
+      <Header nbArticles={nbArticles} user={user} />
       <Routes>
+        <Route
+          path="/cart"
+          element={
+            <Cart
+              cart={cart}
+              total={total}
+              onOrderCart={handleOrderCart}
+              onResetCart={handleResetCart}
+            />
+          }
+        />
         <Route
           path="/"
           element={
@@ -94,8 +106,32 @@ function App() {
             />
           }
         />
+        <Route
+          path="/login"
+          element={
+            <ProtectedRoute>
+              <Login onUser={handleUser} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Account />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/logout"
+          element={
+            <ProtectedRoute>
+              <Logout onUser={handleUser} />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
-    </BrowserRouter>
+    </AuthProvider>
   );
 }
 

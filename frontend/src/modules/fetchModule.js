@@ -39,6 +39,21 @@ export async function getData(url) {
   return response;
 }
 
+export async function getUser(token) {
+  const response = await (
+    await fetch(`${baseUrl}client/getuser`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+  ).json();
+  if (response.code === 401) {
+    sessionStorage.setItem("token", "");
+    window.location.href = "/";
+  }
+  return response;
+}
+
 export async function getToken(data) {
   return await (
     await fetch(logUrl, {

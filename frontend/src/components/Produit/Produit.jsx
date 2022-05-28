@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toTitleCase } from "../../modules/formatter";
 
 function Produit(props) {
   const [produit, setProduit] = useState({});
@@ -9,7 +10,7 @@ function Produit(props) {
 
   return (
     <div>
-      <h2>{produit.nom}</h2>
+      <h2>{toTitleCase(produit.nom)}</h2>
       <img src={`img/${produit.url}`} alt={produit.nom} />
       <h3>{parseFloat(produit.prix).toFixed(2)} €</h3>
     </div>
