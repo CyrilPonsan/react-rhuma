@@ -30,7 +30,11 @@ function useProvideAuth() {
         .then((response) => response.json())
         .then((result) => setUser(result.user[0]));
     }
-    const origin = location.state?.from?.pathname || "/";
+    let origin = location.state?.from?.pathname || "/";
+    if (origin === "/register") {
+      origin = "/";
+    }
+
     navigate(origin);
   }, [token]);
 

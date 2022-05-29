@@ -50,6 +50,9 @@ function Order({ cart, onOrder }) {
               <h3>{toTitleCase(auth.user.adresse)}</h3>
             </span>
             <span>
+              <h3>{toTitleCase(auth.user.complement)}</h3>
+            </span>
+            <span>
               <h3>{auth.user.codePostal}</h3>
               <h3>{toTitleCase(auth.user.ville)}</h3>
             </span>
