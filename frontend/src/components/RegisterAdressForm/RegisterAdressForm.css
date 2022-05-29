@@ -1,0 +1,47 @@
+.reg-section {
+  width: 30%;
+}
+.reg-section > .adresse-form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2vh;
+}
+.reg-section > .adresse-form > div {
+  width: 100%;
+}
+.reg-section > .adresse-form > div > label {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  -moz-column-gap: 1vw;
+       column-gap: 1vw;
+  align-items: center;
+  font-size: 1em;
+}
+.reg-section > .adresse-form > div > label > select {
+  padding: 0.5vw;
+  border-radius: 5px;
+  border: 1px solid rgba(45, 82, 4, 0.781);
+}
+.reg-section > .adresse-form > div > label > input {
+  width: 60%;
+  padding: 1vw;
+  border-radius: 5px;
+  border: 1px solid rgba(45, 82, 4, 0.781);
+}
+.reg-section > .adresse-form > div > label > textarea {
+  width: 60%;
+  padding: 1vw;
+  border-radius: 5px;
+  border: 1px solid rgba(45, 82, 4, 0.781);
+}
+.reg-section > .adresse-form > div:last-child {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  row-gap: 2vh;
+  padding: 1.5vw;
+}/*# sourceMappingURL=RegisterAdressForm.css.map */

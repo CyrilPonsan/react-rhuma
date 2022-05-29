@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../../modules/data.js";
+import "./RegisterAdressForm.css";
 
 function RegisterAdressForm({ email }) {
   const [civilite, updateCivilite] = useState("");
@@ -38,10 +39,10 @@ function RegisterAdressForm({ email }) {
   return (
     <>
       <section className="reg-section">
-        <form className="user-form">
+        <form className="adresse-form">
           <div>
             <label>
-              Civilité
+              Civilité :
               <select
                 value={civilite}
                 onChange={(e) => {
@@ -53,8 +54,10 @@ function RegisterAdressForm({ email }) {
                 <option value="mme">Mme</option>
               </select>
             </label>
+          </div>
+          <div>
             <label>
-              Nom
+              Nom :
               <input
                 type="text"
                 value={nom}
@@ -66,7 +69,7 @@ function RegisterAdressForm({ email }) {
           </div>
           <div>
             <label>
-              Prénom
+              Prénom :
               <input
                 type="text"
                 value={prenom}
@@ -78,7 +81,7 @@ function RegisterAdressForm({ email }) {
           </div>
           <div>
             <label>
-              adresse
+              Adresse :
               <textarea
                 rows={3}
                 value={adresse}
@@ -90,7 +93,7 @@ function RegisterAdressForm({ email }) {
           </div>
           <div>
             <label>
-              Complément d'adresse
+              Complément d'adresse :
               <textarea
                 rows={3}
                 value={complement}
@@ -102,7 +105,7 @@ function RegisterAdressForm({ email }) {
           </div>
           <div>
             <label>
-              Code codePostal
+              Code Postal :
               <input
                 value={codePostal}
                 onChange={(e) => {
@@ -110,8 +113,10 @@ function RegisterAdressForm({ email }) {
                 }}
               />
             </label>
+          </div>
+          <div>
             <label>
-              ville
+              Ville :
               <input
                 type="texte"
                 value={ville}

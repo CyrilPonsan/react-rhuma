@@ -2,24 +2,32 @@ main {
   position: relative;
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: white;
 }
 main > section:nth-child(1) {
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+main > section:nth-child(1) > h2 {
+  font-size: 3em;
+  color: rgba(45, 82, 4, 0.781);
+}
+main > section:nth-child(2) {
   width: 100%;
-  height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-main > section:nth-child(1) > .cat-article {
+main > section:nth-child(2) > .cat-article {
   width: 80%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
-main > section:nth-child(1) > .cat-article > div {
+main > section:nth-child(2) > .cat-article > div {
   display: flex;
   flex-direction: column;
   padding: 1vw;
@@ -28,17 +36,17 @@ main > section:nth-child(1) > .cat-article > div {
   background-color: white;
   row-gap: 1vh;
 }
-main > section:nth-child(1) > .cat-article > div > div:nth-child(1) {
+main > section:nth-child(2) > .cat-article > div > div:nth-child(1) {
   display: flex;
   flex-direction: column;
   align-items: center;
   row-gap: 1vh;
 }
-main > section:nth-child(1) > .cat-article > div > div:nth-child(1) > img {
+main > section:nth-child(2) > .cat-article > div > div:nth-child(1) > img {
   width: 12vw;
   height: auto;
 }
-main > section:nth-child(1) > .cat-article > div > div:nth-child(2) {
+main > section:nth-child(2) > .cat-article > div > div:nth-child(2) {
   display: flex;
   justify-content: center;
 }/*# sourceMappingURL=Catalogue.css.map */

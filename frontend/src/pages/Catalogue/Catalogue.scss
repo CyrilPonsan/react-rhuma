@@ -1,14 +1,26 @@
+$green: rgba(45, 82, 4, 0.781);
+
 main {
     position: relative;
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: white;
 
     >section:nth-child(1) {
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+
+        >h2 {
+            font-size: 3em;
+            color: $green;
+        }
+    }
+
+    >section:nth-child(2) {
         width: 100%;
-        height: 70vh;
         display: flex;
         justify-content: center;
         align-items: center;

@@ -1,0 +1,58 @@
+$green: rgba(45, 82, 4, 0.781);
+
+.acc-main {
+    display: flex;
+    flex-direction: column;
+
+    >.acc-section:nth-child(1) {
+        width: 40%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 5vh;
+
+        >ul {
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+            column-gap: 1vw;
+            color: $green;
+        }
+    }
+
+    >.acc-section:nth-child(2) {
+        width: 40%;
+
+        >table {
+            width: 100%;
+
+            >thead {
+                background-color: $green;
+
+                >tr {
+
+                    >th {
+                        width: 30%;
+                        color: white;
+                        font-weight: bold;
+                        text-align: center;
+                        padding: .5vw;
+                    }
+                }
+            }
+
+            >tbody {
+                >tr {
+
+                    >td {
+                        text-align: center;
+                        padding: .5vw;
+                    }
+                }
+
+                >tr:nth-child(even) {
+                    background-color: rgb(195, 240, 195);
+                }
+            }
+        }
+    }
+}

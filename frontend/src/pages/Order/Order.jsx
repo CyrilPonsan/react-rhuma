@@ -38,7 +38,9 @@ function Order({ cart, onOrder }) {
       {!hasOrdered ? (
         <section className="order-section">
           <article className="order-article">
-            <h4>Adresse de livraison :</h4>
+            <div>
+              <h4>Adresse de livraison :</h4>
+            </div>
             <span>
               {auth.user.civilite && (
                 <h3>{toTitleCase(`${auth.user.civilite}`)}</h3>
@@ -49,7 +51,7 @@ function Order({ cart, onOrder }) {
               <h3>{toTitleCase(auth.user.adresse)}</h3>
             </span>
             <span>
-              <h3>{toTitleCase(auth.user.complement)}</h3>
+              <h3>{auth.user.complement}</h3>
             </span>
             <span>
               <h3>{auth.user.codePostal}</h3>
@@ -57,7 +59,9 @@ function Order({ cart, onOrder }) {
             </span>
           </article>
           <article className="order-article">
-            <h4>Montant :</h4>
+            <div>
+              <h4>Montant :</h4>
+            </div>
             <span>
               <h3>{setTotal(cart).toFixed(2)} €</h3>
             </span>

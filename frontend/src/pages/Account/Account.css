@@ -1,0 +1,41 @@
+.acc-main {
+  display: flex;
+  flex-direction: column;
+}
+.acc-main > .acc-section:nth-child(1) {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5vh;
+}
+.acc-main > .acc-section:nth-child(1) > ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 1vw;
+       column-gap: 1vw;
+  color: rgba(45, 82, 4, 0.781);
+}
+.acc-main > .acc-section:nth-child(2) {
+  width: 40%;
+}
+.acc-main > .acc-section:nth-child(2) > table {
+  width: 100%;
+}
+.acc-main > .acc-section:nth-child(2) > table > thead {
+  background-color: rgba(45, 82, 4, 0.781);
+}
+.acc-main > .acc-section:nth-child(2) > table > thead > tr > th {
+  width: 30%;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 0.5vw;
+}
+.acc-main > .acc-section:nth-child(2) > table > tbody > tr > td {
+  text-align: center;
+  padding: 0.5vw;
+}
+.acc-main > .acc-section:nth-child(2) > table > tbody > tr:nth-child(even) {
+  background-color: rgb(195, 240, 195);
+}/*# sourceMappingURL=Account.css.map */

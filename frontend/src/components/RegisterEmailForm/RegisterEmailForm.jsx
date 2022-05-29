@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { baseUrl } from "../../modules/data.js";
+import "./RegisterEmailForm.css";
 
 function RegisterEmailForm({ onRegister }) {
   const [email, updateEmail] = useState("");
   const [password, updatePassword] = useState("");
+  const [erreur, updateErreur] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,46 +17,54 @@ function RegisterEmailForm({ onRegister }) {
         body: fd,
       })
     ).json();
-    onRegister(email);
+    if (response.result) {
+      onRegister(email);
+      updateErreur(false);
+    } else {
+      updateErreur(true);
+    }
   };
 
   return (
-    <section className="reg-section">
-      <form className="user-form">
+    <form className="email-form">
+      <div>
+        <label>
+          Email
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => {
+              updateEmail(e.target.value);
+            }}
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Mot de Passe
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => {
+              updatePassword(e.target.value);
+            }}
+          />
+        </label>
+      </div>
+      {erreur && (
         <div>
-          <label>
-            email
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => {
-                updateEmail(e.target.value);
-              }}
-            />
-          </label>
+          <p style={{ color: "red" }}>Email insdiponible</p>
         </div>
-        <div>
-          <label>
-            Mot de Passe
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => {
-                updatePassword(e.target.value);
-              }}
-            />
-          </label>
-        </div>
-        <div>
-          <span>
-            <button type="submit" className="button" onClick={handleSubmit}>
-              Envoyer
-            </button>
-          </span>
-        </div>
-      </form>
-    </section>
+      )}
+      <div>
+        <span>
+          <button type="submit" className="button" onClick={handleSubmit}>
+            Envoyer
+          </button>
+        </span>
+      </div>
+    </form>
   );
 }
 

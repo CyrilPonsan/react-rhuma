@@ -7,8 +7,10 @@ use App\Entity\Panier;
 use App\Entity\User;
 use App\Entity\Vente;
 use App\Repository\AdresseRepository;
+use App\Repository\PanierRepository;
 use App\Repository\ProduitRepository;
 use App\Repository\UserRepository;
+use App\Repository\VenteRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -121,6 +123,43 @@ class MainController extends AbstractController
         $manager->flush();
 
         return $this->json(['result' => true]);
+    }
+
+    #[Route('/api/client/getventes', name: 'api_client_getventes')]
+    public function getVentes(PanierRepository $panierRepository, UserRepository $userRepository, VenteRepository $venteRepository): Response
+    {
+        $user = $userRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
+        $ventes = $venteRepository->findBy(['user' => $user]);
+        $tmp = array();
+        foreach ($ventes as $vente) :
+            $paniers = $panierRepository->findBy(['vente' => $vente]);
+            $quantite = 0;
+            $total = 0;
+            foreach ($paniers as $panier) :
+                $quantite += $panier->getQuantite();
+                $total += $panier->getQuantite() * $panier->getPrixVente();
+            endforeach;
+            array_push($tmp, [
+                'id' => $vente->getId(),
+                'date' => $vente->getDate(),
+                'quantite' => $quantite,
+                'total' => $total
+            ]);
+        endforeach;
+        return $this->json([
+            'ventes' => $tmp
+        ]);
+    }
+
+    #[Route('/api/client/handshake', name: 'api_client_handshake')]
+    public function handShake(): Response
+    {
+        if ($this->getUser()) :
+            $result = true;
+        else :
+            $result = false;
+        endif;
+        return $this->json(['result' => $result]);
     }
 
     private function stripTag(): array

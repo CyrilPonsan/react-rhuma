@@ -1,6 +1,7 @@
 import { useState, createContext, useContext, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Login from "../../pages/Login/Login";
+import { baseUrl } from "../../modules/data";
 
 const AuthContext = createContext(null);
 
@@ -22,7 +23,7 @@ function useProvideAuth() {
 
   useEffect(() => {
     if (token) {
-      fetch("http://127.0.0.1:8000/api/client/getuser", {
+      fetch(`${baseUrl}client/getuser`, {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((response) => response.json())
@@ -42,9 +43,22 @@ function useProvideAuth() {
   const handleLogout = () => {
     setToken(null);
     setUser([]);
+    localStorage.setItem("token", "");
     navigate("/");
   };
-  return { token, user, handleLogin, handleLogout };
+
+  const handShake = async () => {
+    try {
+      const response = await (
+        await fetch(`${baseUrl}client/handshake`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+      ).json();
+      return response.result;
+    } catch (error) {}
+  };
+
+  return { token, user, handleLogin, handleLogout, handShake };
 }
 
 export const ProtectedRoute = ({ children }) => {

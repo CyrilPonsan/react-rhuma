@@ -5,6 +5,9 @@ $green: rgba(136, 255, 0, 0.781);
 }
 
 header {
+    position: absolute;
+    top: 0;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;

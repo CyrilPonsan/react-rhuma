@@ -5,7 +5,6 @@ import Catalogue from "../Catalogue/Catalogue";
 import { useEffect, useState } from "react";
 import { setNbArticles, sortCart } from "../../modules/sortArray";
 import { fetchPromise } from "../../modules/fetchModule";
-import { baseUrl } from "../../modules/data.js";
 import Cart from "../Cart/Cart";
 import {
   AuthProvider,

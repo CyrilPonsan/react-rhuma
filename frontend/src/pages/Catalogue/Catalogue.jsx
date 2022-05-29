@@ -5,6 +5,9 @@ function Catalogue({ produits, onAddToCart }) {
   return (
     <main>
       <section>
+        <h2>CATALOGUE</h2>
+      </section>
+      <section>
         <article className="cat-article">
           {produits.map((produit) => {
             return (

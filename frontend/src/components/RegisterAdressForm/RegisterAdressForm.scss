@@ -1,0 +1,53 @@
+.reg-section {
+    width: 30%;
+
+    >.adresse-form {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 2vh;
+
+        >div {
+            width: 100%;
+
+            >label {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                column-gap: 1vw;
+                align-items: center;
+                font-size: 1em;
+
+                >select {
+                    padding: .5vw;
+                    border-radius: 5px;
+                    border: 1px solid rgba(45, 82, 4, 0.781);
+                }
+
+                >input {
+                    width: 60%;
+                    padding: 1vw;
+                    border-radius: 5px;
+                    border: 1px solid rgba(45, 82, 4, 0.781);
+                }
+
+                >textarea {
+                    width: 60%;
+                    padding: 1vw;
+                    border-radius: 5px;
+                    border: 1px solid rgba(45, 82, 4, 0.781);
+                }
+            }
+        }
+
+        >div:last-child {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            row-gap: 2vh;
+            padding: 1.5vw;
+        }
+    }
+}
