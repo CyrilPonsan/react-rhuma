@@ -7,7 +7,6 @@ function LoginForm({ onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("email", email);
     onSubmit(email, password);
   };
 

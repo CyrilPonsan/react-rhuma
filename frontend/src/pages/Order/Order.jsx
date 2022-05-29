@@ -13,7 +13,6 @@ function Order({ cart, onOrder }) {
 
   const handleOrder = async () => {
     if (cart.length > 0) {
-      console.log(auth.token);
       const data = new FormData();
       data.append("cart", JSON.stringify(cart));
       const result = await (

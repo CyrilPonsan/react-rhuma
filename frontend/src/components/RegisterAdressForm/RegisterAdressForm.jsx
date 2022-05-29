@@ -15,7 +15,6 @@ function RegisterAdressForm({ email }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("email tata", email);
     const newUser = {
       email: email,
       civilite: civilite,

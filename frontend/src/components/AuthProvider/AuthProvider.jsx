@@ -1,8 +1,6 @@
 import { useState, createContext, useContext, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { getUser } from "../../modules/fetchModule";
 import Login from "../../pages/Login/Login";
-import Logout from "../Logout/Logout";
 
 const AuthContext = createContext(null);
 
@@ -34,7 +32,6 @@ function useProvideAuth() {
     if (origin === "/register") {
       origin = "/";
     }
-
     navigate(origin);
   }, [token]);
 
@@ -52,14 +49,7 @@ function useProvideAuth() {
 
 export const ProtectedRoute = ({ children }) => {
   const auth = useAuth();
-  //console.log("auth", auth);
   const location = useLocation();
-
-  if (location.pathname === "/logout") {
-    return (
-      <Logout onLogout={auth.handleLogout} onUser={children.props.onUser} />
-    );
-  }
 
   if (!auth.token) {
     return (
