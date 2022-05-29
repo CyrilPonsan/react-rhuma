@@ -3,7 +3,7 @@ import Header from "../../components/Header/Header";
 import { Route, Routes } from "react-router-dom";
 import Catalogue from "../Catalogue/Catalogue";
 import { useEffect, useState } from "react";
-import { setNbArticles, setTotal, sortCart } from "../../modules/sortArray";
+import { setNbArticles, sortCart } from "../../modules/sortArray";
 import { fetchPromise } from "../../modules/fetchModule";
 import { baseUrl } from "../../modules/data.js";
 import Cart from "../Cart/Cart";
@@ -14,32 +14,31 @@ import {
 import Account from "../Account/Account";
 import Login from "../Login/Login";
 import Logout from "../../components/Logout/Logout";
+import Register from "../Register/Register";
+import Order from "../Order/Order";
 
 function App() {
   const savedCart = localStorage.getItem("cart");
   const [cart, updateCart] = useState(savedCart ? JSON.parse(savedCart) : []);
   const [produits, setProduits] = useState([]);
-  const [displayCart, updateDisplayCart] = useState(false);
   const [nbArticles, updateNbArticles] = useState(0);
-  const [total, updateTotal] = useState(0);
   const [user, setUser] = useState({});
 
   useEffect(() => init(), []);
+
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
     updateNbArticles(setNbArticles(cart));
-    updateTotal(setTotal(cart));
   }, [cart]);
 
   const init = () => {
     fetchPromise("getproduits").then(({ produits }) => setProduits(produits));
     updateNbArticles(setNbArticles(cart));
-    updateTotal(setTotal(cart));
   };
 
   const handleUser = (user) => {
     if (user) {
-      setUser({ nom: user.nom });
+      setUser(user);
     } else {
       setUser(null);
     }
@@ -60,23 +59,6 @@ function App() {
     }
   };
 
-  const handleOrderCart = async () => {
-    if (cart.length > 0) {
-      const data = new FormData();
-      data.append("client", 1);
-      data.append("cart", JSON.stringify(cart));
-      const result = await (
-        await fetch(`${baseUrl}setvente`, {
-          method: "POST",
-          body: data,
-        })
-      ).json();
-      handleResetCart();
-    } else {
-      alert("Votre panier est vide");
-    }
-  };
-
   const handleResetCart = () => {
     updateCart([]);
   };
@@ -87,23 +69,12 @@ function App() {
       <Routes>
         <Route
           path="/cart"
-          element={
-            <Cart
-              cart={cart}
-              total={total}
-              onOrderCart={handleOrderCart}
-              onResetCart={handleResetCart}
-            />
-          }
+          element={<Cart cart={cart} onResetCart={handleResetCart} />}
         />
         <Route
           path="/"
           element={
-            <Catalogue
-              displayCart={displayCart}
-              produits={produits}
-              onAddToCart={handleAddToCart}
-            />
+            <Catalogue produits={produits} onAddToCart={handleAddToCart} />
           }
         />
         <Route
@@ -118,7 +89,7 @@ function App() {
           path="/profile"
           element={
             <ProtectedRoute>
-              <Account />
+              <Account user={user} />
             </ProtectedRoute>
           }
         />
@@ -127,6 +98,20 @@ function App() {
           element={
             <ProtectedRoute>
               <Logout onUser={handleUser} />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/order"
+          element={
+            <ProtectedRoute>
+              <Order
+                cart={cart}
+                onUser={handleUser}
+                user={user}
+                onOrder={handleResetCart}
+              />
             </ProtectedRoute>
           }
         />

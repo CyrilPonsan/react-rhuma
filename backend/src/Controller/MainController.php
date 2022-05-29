@@ -3,16 +3,26 @@
 namespace App\Controller;
 
 use App\Entity\Panier;
+use App\Entity\User;
 use App\Entity\Vente;
+use App\Repository\AdresseRepository;
 use App\Repository\ProduitRepository;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class MainController extends AbstractController
 {
+    private $passwordHasher;
+
+    public function __construct(UserPasswordHasherInterface $userPasswordHasherInterface)
+    {
+        $this->passwordHasher = $userPasswordHasherInterface;
+    }
+
     #[Route('/api/getproduits', name: 'api_getproduits')]
     public function getProduits(ProduitRepository $produitRepository): Response
     {
@@ -25,7 +35,7 @@ class MainController extends AbstractController
     {
         $email = strip_tags($_POST['email']);
         $user = $userRepository->findOneBy(['email' => $email]);
-        if ($user) :
+        if (isset($user)) :
             $result = false;
         else :
             $result = true;
@@ -33,18 +43,19 @@ class MainController extends AbstractController
         return $this->json(['result' => $result]);
     }
 
-    #[Route('/api/setvente', name: 'api_setvente')]
+    #[Route('/api/client/setvente', name: 'api_setvente')]
     public function setVente(
-        UserRepository $clientRepository,
+        UserRepository $userRepository,
         ProduitRepository $produitRepository,
         ManagerRegistry $doctrine
     ): Response {
 
+        $user = $userRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
         $data = json_decode($_POST['cart']);
         $manager = $doctrine->getManager();
         $vente = new Vente();
         $vente->setDate(new \DateTime());
-        $vente->setUser($clientRepository->findOneBy(['id' => 1]));
+        $vente->setUser($user);
         foreach ($data as $el) :
             $panier = new Panier();
             $panier->setVente($vente);
@@ -60,9 +71,42 @@ class MainController extends AbstractController
     }
 
     #[Route('/api/client/getuser', name: 'api_client_getuser')]
-    public function getClient(UserRepository $userRepository): Response
+    public function getClient(UserRepository $userRepository, AdresseRepository $adresseRepository): Response
     {
         $user = $userRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
-        return $this->json(['user' => $user]);
+        $adresse = $adresseRepository->findBy(['user' => $user, 'main' => 1]);
+
+        return $this->json(['user' => $adresse]);
+    }
+
+    #[route('/api/register-user', name: 'api_register-user')]
+    public function registerUser(UserRepository $userRepository, ManagerRegistry $doctrine): Response
+    {
+        $data = $this->stripTag();
+        $email = $userRepository->findOneBy(['email' => $data[0]]);
+        if (!isset($email)) :
+            $result = false;
+        else :
+            $user = new User();
+            $user->setEmail($data[0]);
+            $hash = $this->passwordHasher->hashPassword($user, $data[1]);
+            $user->setPassword($hash);
+            $manager = $doctrine->getManager();
+            $manager->persist($user);
+            $manager->flush();
+            $result = true;
+        endif;
+        return $this->json(['result' => $result]);
+    }
+
+
+    private function stripTag(): array
+    {
+        $tmp = json_decode($_POST['data']);
+        $data = array();
+        foreach ($tmp as $el) :
+            array_push($data, strtolower(strip_tags($el)));
+        endforeach;
+        return $data;
     }
 }

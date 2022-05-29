@@ -1,32 +1,16 @@
-import { useNavigate } from "react-router-dom";
 import LoginForm from "../../components/LoginForm/LoginForm";
+import "./Login.css";
 
-function Login({ onLogin, isLogged, onUser }) {
-  const navigate = useNavigate();
-
+function Login({ onLogin, onUser }) {
   const handleSuccess = (data) => {
     onLogin(data[0]);
     onUser(data[1]);
   };
 
   return (
-    <>
-      <h1>Login Page</h1>
-      {!isLogged ? (
-        <LoginForm onSuccess={handleSuccess} />
-      ) : (
-        <>
-          <h2>Vous êtes déjà connecté</h2>
-          <button
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            Retour
-          </button>
-        </>
-      )}
-    </>
+    <main className="login-main">
+      <LoginForm onSuccess={handleSuccess} />
+    </main>
   );
 }
 

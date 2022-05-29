@@ -6,6 +6,16 @@ import Logout from "../Logout/Logout";
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
+  const auth = useProvideAuth();
+
+  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
+};
+
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
+
+function useProvideAuth() {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -13,8 +23,7 @@ export const AuthProvider = ({ children }) => {
 
   const handleLogin = async (newToken) => {
     setToken(newToken);
-
-    const origin = location.state?.from?.pathname || "/profile";
+    const origin = location.pathname;
     navigate(origin);
   };
 
@@ -22,33 +31,29 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
     navigate("/");
   };
-
-  const value = {
-    token,
-    onLogin: handleLogin,
-    onLogout: handleLogout,
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-};
-
-const useAuth = () => {
-  return useContext(AuthContext);
-};
+  return { token, handleLogin, handleLogout };
+}
 
 export const ProtectedRoute = ({ children }) => {
-  const { token, onLogin, onLogout } = useAuth();
+  const auth = useAuth();
+  console.log("auth", auth);
   const location = useLocation();
 
   if (location.pathname === "/logout") {
-    return <Logout onLogout={onLogout} onUser={children.props.onUser} />;
+    return (
+      <Logout onLogout={auth.handleLogout} onUser={children.props.onUser} />
+    );
   }
 
-  if (!token) {
+  if (!auth.token) {
     return (
       <Login
-        onLogin={onLogin}
+        onLogin={auth.handleLogin}
         onUser={children.props.onUser}
+        cart={children.props.cart}
+        token={auth.token}
+        user={children.props.user}
+        onOrder={children.props.onOrder}
         to="/"
         replace
         state={{ from: location }}

@@ -1,5 +1,9 @@
 $green: rgba(136, 255, 0, 0.781);
 
+.active {
+    border-bottom: 1px solid $green;
+}
+
 header {
     display: flex;
     justify-content: space-between;
@@ -35,15 +39,7 @@ header {
                 }
             }
 
-            >li:nth-child(2) {
-                display: flex;
-                column-gap: .5vw;
-                align-items: center;
-
-                &:hover {
-                    cursor: pointer;
-                }
-
+            >.nb-articles {
                 >span {
                     width: 1.5vw;
                     height: 1.5vw;

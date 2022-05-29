@@ -1,8 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toTitleCase } from "../../modules/formatter";
+import { setTotal } from "../../modules/sortArray";
 import "./Cart.css";
 
-function Cart({ cart, total, onOrderCart, onResetCart }) {
+function Cart({ cart, onOrderCart, onResetCart }) {
   const navigate = useNavigate();
 
   const handleClickOrder = () => {
@@ -18,7 +19,7 @@ function Cart({ cart, total, onOrderCart, onResetCart }) {
   };
 
   return (
-    <>
+    <main>
       <div>
         {cart.length !== 0 ? (
           <h2>Contenu du panier :</h2>
@@ -42,29 +43,28 @@ function Cart({ cart, total, onOrderCart, onResetCart }) {
         {cart.length !== 0 && (
           <div className="total">
             <h3>Total : </h3>
-            <h3>{total.toFixed(2)} €</h3>
+            <h3>{setTotal(cart).toFixed(2)} €</h3>
           </div>
         )}
         <div className="boutons">
           <div>
             <button className="button" onClick={handleCloseCart}>
-              Fermer
+              Retour
             </button>
             {cart.length !== 0 && (
               <>
-                {" "}
                 <button className="button" onClick={handleClickReset}>
                   &nbsp;Vider&nbsp;
                 </button>
-                <button className="button" onClick={handleClickOrder}>
-                  Commander
-                </button>
+                <Link to="/order">
+                  <button className="button">Commander</button>
+                </Link>
               </>
             )}
           </div>
         </div>
       </div>
-    </>
+    </main>
   );
 }
 export default Cart;

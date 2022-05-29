@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, matchPath, useLocation, useMatch } from "react-router-dom";
 import "./Header.css";
 
 function Header({ nbArticles, user }) {
+  let path = useLocation().pathname;
   return (
     <>
       <header>
@@ -10,17 +11,21 @@ function Header({ nbArticles, user }) {
         </div>
         <div>
           <ul>
-            <li>
+            <li className={"/" === path ? "active" : null}>
               <Link to="/">Accueil</Link>
             </li>
             {nbArticles !== 0 && (
-              <li>
-                <Link to="/cart">Panier</Link>
-                <span>{nbArticles}</span>
-              </li>
+              <>
+                <li className={"/cart" === path ? "active" : null}>
+                  <Link to="/cart">Panier</Link>
+                </li>
+                <li className="nb-articles">
+                  <span>{nbArticles}</span>
+                </li>
+              </>
             )}
             {user && (
-              <li>
+              <li className={"/profile" === path ? "active" : null}>
                 <Link to="/profile">{user.nom}</Link>
               </li>
             )}
@@ -29,7 +34,7 @@ function Header({ nbArticles, user }) {
                 <Link to="/logout">Déconnexion</Link>
               </li>
             ) : (
-              <li>
+              <li className={"/login" === path ? "active" : null}>
                 <Link to="/login">Connexion</Link>
               </li>
             )}

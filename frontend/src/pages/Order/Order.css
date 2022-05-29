@@ -1,0 +1,42 @@
+.order-main > .order-section {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2vh;
+}
+.order-main > .order-section > .order-article {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 2vh;
+  border: 1px solid rgba(45, 82, 4, 0.781);
+  border-radius: 10px;
+  padding: 2vw;
+}
+.order-main > .order-section > .order-article > h4 {
+  color: rgba(45, 82, 4, 0.781);
+  text-decoration: underline;
+}
+.order-main > .order-section > .order-article > span {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 0.5vw;
+       column-gap: 0.5vw;
+  justify-content: flex-end;
+}
+.order-main > .order-section > .order-article:nth-child(3) {
+  border: none;
+}
+.order-main > .order-section > .order-article-panier-vide {
+  width: 100%;
+  border: none;
+}
+.order-main > .order-section > .order-article-panier-vide:first-child {
+  border-bottom: 1px solid rgba(45, 82, 4, 0.781);
+  padding-bottom: 1vh;
+}
+.order-main > .order-section > .order-article-panier-vide:last-child > span {
+  display: flex;
+  justify-content: flex-end;
+}/*# sourceMappingURL=Order.css.map */

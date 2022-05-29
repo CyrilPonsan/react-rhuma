@@ -1,3 +1,7 @@
+.active {
+  border-bottom: 1px solid rgba(136, 255, 0, 0.781);
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -29,16 +33,7 @@ header > div > ul > li > a {
 header > div > ul > li:hover {
   filter: brightness(1.5);
 }
-header > div > ul > li:nth-child(2) {
-  display: flex;
-  -moz-column-gap: 0.5vw;
-       column-gap: 0.5vw;
-  align-items: center;
-}
-header > div > ul > li:nth-child(2):hover {
-  cursor: pointer;
-}
-header > div > ul > li:nth-child(2) > span {
+header > div > ul > .nb-articles > span {
   width: 1.5vw;
   height: 1.5vw;
   display: flex;
