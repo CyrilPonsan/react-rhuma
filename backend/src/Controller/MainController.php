@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Adresse;
 use App\Entity\Panier;
 use App\Entity\User;
 use App\Entity\Vente;
@@ -84,7 +85,7 @@ class MainController extends AbstractController
     {
         $data = $this->stripTag();
         $email = $userRepository->findOneBy(['email' => $data[0]]);
-        if (!isset($email)) :
+        if (isset($email)) :
             $result = false;
         else :
             $user = new User();
@@ -99,6 +100,28 @@ class MainController extends AbstractController
         return $this->json(['result' => $result]);
     }
 
+    #[Route('/api/register-adresse', name: 'api_register-adresse')]
+    public function registerAdresse(ManagerRegistry $doctrine, UserRepository $userRepository): Response
+    {
+        $data = strip_tags($_POST['data']);
+        $data = json_decode(($data));
+        $user = $userRepository->findOneBy(['email' => $data->email]);
+        $adresse = new Adresse();
+        $adresse->setCivilite($data->civilite);
+        $adresse->setPrenom($data->prenom);
+        $adresse->setNom($data->nom);
+        $adresse->setAdresse($data->adresse);
+        $adresse->setComplement($data->complement);
+        $adresse->setCodePostal($data->codePostal);
+        $adresse->setVille($data->ville);
+        $adresse->setUser($user);
+        $adresse->setMain(true);
+        $manager = $doctrine->getManager();
+        $manager->persist($adresse);
+        $manager->flush();
+
+        return $this->json(['result' => true]);
+    }
 
     private function stripTag(): array
     {

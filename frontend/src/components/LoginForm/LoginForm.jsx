@@ -1,17 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { getToken, getUser } from "../../modules/fetchModule";
 
-function LoginForm({ onSuccess }) {
+function LoginForm({ onSubmit }) {
   const [email, updateEmail] = useState("");
   const [password, updatePassword] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const response = await getToken([email, password]);
-    console.log(response);
-    const user = await getUser(response.token);
-    onSuccess([response.token, user.user]);
+    console.log("email", email);
+    onSubmit(email, password);
   };
 
   return (

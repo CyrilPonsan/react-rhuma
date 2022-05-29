@@ -1,9 +1,10 @@
 import { useEffect } from "react";
+import { useAuth } from "../AuthProvider/AuthProvider";
 
-function Logout({ onLogout, onUser }) {
+function Logout() {
+  const auth = useAuth();
   useEffect(() => {
-    onUser(null);
-    onLogout();
+    auth.handleLogout();
   }, []);
 }
 

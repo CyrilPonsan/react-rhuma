@@ -1,15 +1,19 @@
+import { useAuth } from "../../components/AuthProvider/AuthProvider";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import "./Login.css";
+import { getToken, getUser } from "../../modules/fetchModule";
 
-function Login({ onLogin, onUser }) {
-  const handleSuccess = (data) => {
-    onLogin(data[0]);
-    onUser(data[1]);
+function Login() {
+  const auth = useAuth();
+
+  const handleSubmit = async (email, password) => {
+    const response = await getToken([email, password]);
+    auth.handleLogin(response.token);
   };
 
   return (
     <main className="login-main">
-      <LoginForm onSuccess={handleSuccess} />
+      <LoginForm onSubmit={handleSubmit} />
     </main>
   );
 }

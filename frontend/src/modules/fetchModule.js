@@ -47,10 +47,6 @@ export async function getUser(token) {
       },
     })
   ).json();
-  if (response.code === 401) {
-    sessionStorage.setItem("token", "");
-    window.location.href = "/";
-  }
   return response;
 }
 

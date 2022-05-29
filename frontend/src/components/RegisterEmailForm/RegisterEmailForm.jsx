@@ -15,6 +15,7 @@ function RegisterEmailForm({ onRegister }) {
         body: fd,
       })
     ).json();
+    onRegister(email);
   };
 
   return (

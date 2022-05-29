@@ -1,7 +1,10 @@
-import { Link, matchPath, useLocation, useMatch } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { toTitleCase } from "../../modules/formatter";
+import { useAuth } from "../AuthProvider/AuthProvider";
 import "./Header.css";
 
-function Header({ nbArticles, user }) {
+function Header({ nbArticles }) {
+  const auth = useAuth();
   let path = useLocation().pathname;
   return (
     <>
@@ -24,12 +27,12 @@ function Header({ nbArticles, user }) {
                 </li>
               </>
             )}
-            {user && (
-              <li className={"/profile" === path ? "active" : null}>
-                <Link to="/profile">{user.nom}</Link>
+            {auth.token && (
+              <li className={"/account" === path ? "active" : null}>
+                <Link to="/account">{toTitleCase(auth.user.nom)}</Link>
               </li>
             )}
-            {user ? (
+            {auth.token ? (
               <li>
                 <Link to="/logout">Déconnexion</Link>
               </li>

@@ -1,4 +1,8 @@
-function Account({ user }) {
+import { useAuth } from "../../components/AuthProvider/AuthProvider";
+
+function Account() {
+  const auth = useAuth();
+  const user = auth.user;
   return (
     <>
       <h1>Mon Compte</h1>

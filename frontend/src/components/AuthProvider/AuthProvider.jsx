@@ -1,5 +1,6 @@
-import { useState, createContext, useContext } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { getUser } from "../../modules/fetchModule";
 import Login from "../../pages/Login/Login";
 import Logout from "../Logout/Logout";
 
@@ -7,7 +8,6 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const auth = useProvideAuth();
-
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 };
 
@@ -20,23 +20,35 @@ function useProvideAuth() {
   const location = useLocation();
 
   const [token, setToken] = useState(null);
+  const [user, setUser] = useState([]);
 
-  const handleLogin = async (newToken) => {
-    setToken(newToken);
-    const origin = location.pathname;
+  useEffect(() => {
+    if (token) {
+      fetch("http://127.0.0.1:8000/api/client/getuser", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((response) => response.json())
+        .then((result) => setUser(result.user[0]));
+    }
+    const origin = location.state?.from?.pathname || "/";
     navigate(origin);
+  }, [token]);
+
+  const handleLogin = (newToken) => {
+    setToken(newToken);
   };
 
   const handleLogout = () => {
     setToken(null);
+    setUser([]);
     navigate("/");
   };
-  return { token, handleLogin, handleLogout };
+  return { token, user, handleLogin, handleLogout };
 }
 
 export const ProtectedRoute = ({ children }) => {
   const auth = useAuth();
-  console.log("auth", auth);
+  //console.log("auth", auth);
   const location = useLocation();
 
   if (location.pathname === "/logout") {
@@ -48,11 +60,7 @@ export const ProtectedRoute = ({ children }) => {
   if (!auth.token) {
     return (
       <Login
-        onLogin={auth.handleLogin}
-        onUser={children.props.onUser}
         cart={children.props.cart}
-        token={auth.token}
-        user={children.props.user}
         onOrder={children.props.onOrder}
         to="/"
         replace

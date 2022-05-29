@@ -22,7 +22,6 @@ function App() {
   const [cart, updateCart] = useState(savedCart ? JSON.parse(savedCart) : []);
   const [produits, setProduits] = useState([]);
   const [nbArticles, updateNbArticles] = useState(0);
-  const [user, setUser] = useState({});
 
   useEffect(() => init(), []);
 
@@ -34,14 +33,6 @@ function App() {
   const init = () => {
     fetchPromise("getproduits").then(({ produits }) => setProduits(produits));
     updateNbArticles(setNbArticles(cart));
-  };
-
-  const handleUser = (user) => {
-    if (user) {
-      setUser(user);
-    } else {
-      setUser(null);
-    }
   };
 
   const handleAddToCart = (id, nom, prix) => {
@@ -65,7 +56,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <Header nbArticles={nbArticles} user={user} />
+      <Header nbArticles={nbArticles} />
       <Routes>
         <Route
           path="/cart"
@@ -81,15 +72,15 @@ function App() {
           path="/login"
           element={
             <ProtectedRoute>
-              <Login onUser={handleUser} />
+              <Login />
             </ProtectedRoute>
           }
         />
         <Route
-          path="/profile"
+          path="/account"
           element={
             <ProtectedRoute>
-              <Account user={user} />
+              <Account />
             </ProtectedRoute>
           }
         />
@@ -97,7 +88,7 @@ function App() {
           path="/logout"
           element={
             <ProtectedRoute>
-              <Logout onUser={handleUser} />
+              <Logout />
             </ProtectedRoute>
           }
         />
@@ -106,12 +97,7 @@ function App() {
           path="/order"
           element={
             <ProtectedRoute>
-              <Order
-                cart={cart}
-                onUser={handleUser}
-                user={user}
-                onOrder={handleResetCart}
-              />
+              <Order cart={cart} onOrder={handleResetCart} />
             </ProtectedRoute>
           }
         />

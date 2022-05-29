@@ -6,7 +6,7 @@ import { baseUrl } from "../../modules/data";
 import "./Order.css";
 import { useAuth } from "../../components/AuthProvider/AuthProvider";
 
-function Order({ cart, user, onOrder }) {
+function Order({ cart, onOrder }) {
   const [hasOrdered, updateHasOrdered] = useState(false);
   const navigate = useNavigate();
   const auth = useAuth();
@@ -15,7 +15,6 @@ function Order({ cart, user, onOrder }) {
     if (cart.length > 0) {
       console.log(auth.token);
       const data = new FormData();
-      data.append("client", 1);
       data.append("cart", JSON.stringify(cart));
       const result = await (
         await fetch(`${baseUrl}client/setvente`, {
@@ -42,15 +41,17 @@ function Order({ cart, user, onOrder }) {
           <article className="order-article">
             <h4>Adresse de livraison :</h4>
             <span>
-              {user.civilite && <h3>{toTitleCase(`${user.civilite}`)}</h3>}
-              <h3>{toTitleCase(`${user.prenom} ${user.nom}`)}</h3>
+              {auth.user.civilite && (
+                <h3>{toTitleCase(`${auth.user.civilite}`)}</h3>
+              )}
+              <h3>{toTitleCase(`${auth.user.prenom} ${auth.user.nom}`)}</h3>
             </span>
             <span>
-              <h3>{toTitleCase(user.adresse)}</h3>
+              <h3>{toTitleCase(auth.user.adresse)}</h3>
             </span>
             <span>
-              <h3>{user.CodePostal}</h3>
-              <h3>{toTitleCase(user.ville)}</h3>
+              <h3>{auth.user.codePostal}</h3>
+              <h3>{toTitleCase(auth.user.ville)}</h3>
             </span>
           </article>
           <article className="order-article">
